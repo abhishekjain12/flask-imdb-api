@@ -7,7 +7,7 @@ import pymysql.cursors
 # Open database connection
 db = pymysql.connect(host="localhost",
                      user="root",
-                     password="Future@4",
+                     password="root",
                      db="Movie_Data",
                      charset='utf8mb4',
                      cursorclass=pymysql.cursors.DictCursor)
