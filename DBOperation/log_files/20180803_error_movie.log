@@ -1,0 +1,35 @@
+ERROR    - 2018-08-03 19:21:19,865 [app.py][log_exception]  Exception on /movie/title [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "./app.py", line 74, in movie_detail_by_title
+    genre_result = select_query("SELECT genre FROM Movie_Genres WHERE id='{0}'".format(db_result['data'][0]['id']))
+IndexError: list index out of range
+ERROR    - 2018-08-03 19:22:37,904 [db_sqlite3.py][add_record]  Failed insert query: UNIQUE constraint failed: Movie_Details.id
+ERROR    - 2018-08-03 19:22:37,905 [app.py][log_exception]  Exception on /movie/title [GET]
+Traceback (most recent call last):
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/movies-data-api/mvenv/lib/python3.5/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "./app.py", line 74, in movie_detail_by_title
+    genre_result = select_query("SELECT genre FROM Movie_Genres WHERE id='{0}'".format(db_result['data'][0]['id']))
+IndexError: list index out of range
