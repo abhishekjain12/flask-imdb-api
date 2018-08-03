@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "30e26309-0a1b-49d7-b809-0bddf0e43772",
+		"name": "movie-detail-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "828d7e92-293c-4e3d-af23-089a59a1e320",
+			"name": "index page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "42a3b18f-1908-4208-a272-71ec2e8c31b5",
+			"name": "Search by id - No data in local",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/tt0065126",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"tt0065126"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "f967fb51-4e4f-4e96-9bf1-d8acbec83e9a",
+			"name": "Search by title",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/title?title=Skyscraper",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"title"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Skyscraper"
+						}
+					]
+				},
+				"description": "Not in local DB. Get from imdb api"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "a7dadaca-d8c1-423e-81ff-2acf979cf6a8",
+			"name": "Search by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/tt2357129",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"tt2357129"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "1040bd12-aa02-4013-85da-b7795db24c89",
+			"name": "Update rating",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key",
+							"value": "rating",
+							"sessionValue": "rating",
+							"type": "text"
+						},
+						{
+							"key": "value",
+							"value": "6.1",
+							"sessionValue": "6.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/tt2357129",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"tt2357129"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "a6f4e052-985d-43c0-b9b4-4373f461dc50",
+			"name": "Update genre",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "key",
+							"value": "genre",
+							"sessionValue": "rating",
+							"type": "text"
+						},
+						{
+							"key": "value",
+							"value": "Action",
+							"sessionValue": "6.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/tt2357129",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"tt2357129"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "9af70a0e-4080-4da1-b9f6-10740be3df50",
+			"name": "Search by title",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/title?title=the godfather",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"title"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "the godfather"
+						}
+					]
+				},
+				"description": "Not in local DB. Get from imdb api"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "9f86ff69-b7ab-406e-b994-e23e48adf0bd",
+			"name": "Search by title",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/title?title=Inception",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"title"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Inception"
+						}
+					]
+				},
+				"description": "Not in local DB. Get from imdb api"
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "48dfc352-b6e4-437c-942e-10dd0389110a",
+			"name": "Serach by year",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "action",
+							"value": "year",
+							"sessionValue": "rating",
+							"type": "text"
+						},
+						{
+							"key": "value",
+							"value": "2013",
+							"sessionValue": "6.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/filter?action=year&value=2013",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "year"
+						},
+						{
+							"key": "value",
+							"value": "2013"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "04c9120f-91a6-409f-99a0-7e9d4d4950d7",
+			"name": "Serach by year range",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "action",
+							"value": "year",
+							"sessionValue": "rating",
+							"type": "text"
+						},
+						{
+							"key": "value",
+							"value": "2013",
+							"sessionValue": "6.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/filter?action=year_range&start_year=2010&end_year=2013",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "year_range"
+						},
+						{
+							"key": "start_year",
+							"value": "2010"
+						},
+						{
+							"key": "end_year",
+							"value": "2013"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "61af643b-c05e-4bcb-88be-102115758b4e",
+			"name": "Serach by rating higher than",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "action",
+							"value": "year",
+							"sessionValue": "rating",
+							"type": "text"
+						},
+						{
+							"key": "value",
+							"value": "2013",
+							"sessionValue": "6.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/filter?action=higher_rating&value=8",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "higher_rating"
+						},
+						{
+							"key": "value",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "0a3853e1-8776-48b8-aa39-d2baca3ea500",
+			"name": "Serach by rating lower than",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "action",
+							"value": "year",
+							"sessionValue": "rating",
+							"type": "text"
+						},
+						{
+							"key": "value",
+							"value": "2013",
+							"sessionValue": "6.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/filter?action=lower_rating&value=9",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "lower_rating"
+						},
+						{
+							"key": "value",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "118c062c-b012-4151-aac9-f0eed323c970",
+			"name": "Serach by genre",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "action",
+							"value": "year",
+							"sessionValue": "rating",
+							"type": "text"
+						},
+						{
+							"key": "value",
+							"value": "2013",
+							"sessionValue": "6.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/filter?action=genre&value=Action",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "genre"
+						},
+						{
+							"key": "value",
+							"value": "Action"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
