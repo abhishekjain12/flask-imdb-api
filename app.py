@@ -1,10 +1,14 @@
 import datetime
+import logging
 
 from flask import Flask, jsonify, request
 
 # from DBOperation.db import select_query, add_record, update_rating, update_genre
+from DBOperation import logs
 from DBOperation.db_sqlite3 import select_query, add_record, update_rating, update_genre
 from OMDb.api import OMDB
+
+logs.initialize_logger("movie")
 
 app = Flask(__name__)
 
@@ -21,6 +25,7 @@ def isfloat(value):
 
 @app.route('/')
 def index():
+    logging.debug("index")
     return jsonify({'message': 'Welcome To Movie Data API'})
 
 
@@ -89,6 +94,7 @@ def movie_detail_by_id(id):
 # endpoint to get movies by filter
 @app.route("/movie/filter/", methods=["GET"])
 def movies_by_filter():
+    logging.debug("filter")
     action = request.args['action']
 
     if action == "year":
@@ -134,4 +140,5 @@ def movies_by_filter():
 
 
 if __name__ == '__main__':
+    logging.debug("App starts")
     app.run(host='0.0.0.0')
