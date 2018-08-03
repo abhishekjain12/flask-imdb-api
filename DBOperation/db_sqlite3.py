@@ -22,6 +22,7 @@ def select_query(sql):
         cursor = db.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()
+        print(sql)
         return result
 
     except Exception as e:

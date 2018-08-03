@@ -61,12 +61,12 @@ def update_data(id):
 @app.route("/movie/title", methods=["GET"])
 def movie_detail_by_title():
     title = request.args['title']
-    db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE title='{0}' limit 1".format(title))}
+    db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE title LIKE'{0}' limit 1".format(title))}
     if not db_result['data']:
         obj = OMDB(apikey=api_key)
         obj.get(title=title)
         add_record(obj)
-        db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE title='{0}' limit 1".format(title))}
+        db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE title LIKE'{0}' limit 1".format(title))}
         if not db_result:
             return jsonify({'message': 'No data found!'}), 404
 
