@@ -2,7 +2,8 @@ import datetime
 
 from flask import Flask, jsonify, request
 
-from DBOperation.db import select_query, add_record, update_rating, update_genre
+# from DBOperation.db import select_query, add_record, update_rating, update_genre
+from DBOperation.db_sqlite3 import select_query, add_record, update_rating, update_genre
 from OMDb.api import OMDB
 
 app = Flask(__name__)
@@ -64,7 +65,9 @@ def movie_detail_by_title():
         if not db_result:
             return jsonify({'message': 'No data found!'}), 404
 
+    print(db_result)
     genre_result = select_query("SELECT genre FROM Movie_Genres WHERE id='{0}'".format(db_result['data'][0]['id']))
+    print(genre_result)
     db_result['data'][0]['genres'] = list(genre['genre'] for genre in genre_result)
     db_result['time'] = datetime.datetime.now()
     return jsonify(db_result)
