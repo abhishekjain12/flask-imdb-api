@@ -8,11 +8,11 @@ from DBOperation import logs
 from DBOperation.db_sqlite3 import select_query, add_record, update_rating, update_genre
 from OMDb.api import OMDB
 
-logs.initialize_logger("movie")
+logs.initialize_logger("flask-imdb-api")
 
 app = Flask(__name__)
 
-api_key = "73d0cdbe"
+api_key = "API_KEY"
 
 
 def isfloat(value):
@@ -35,7 +35,7 @@ def update_data(id):
     key = request.form['key']
     value = request.form['value']
 
-    db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE id='{0}' limit 1".format(id))}
+    db_result = {'data': select_query("SELECT * FROM movie_details WHERE id='{0}' limit 1".format(id))}
     if not db_result:
         return jsonify({'message': 'No data found!'}), 404
 
@@ -50,8 +50,8 @@ def update_data(id):
     if key == "genre":
         update_genre(id, value)
 
-    db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE id='{0}' limit 1".format(id))}
-    genre_result = select_query("SELECT genre FROM Movie_Genres WHERE id='{0}'".format(id))
+    db_result = {'data': select_query("SELECT * FROM movie_details WHERE id='{0}' limit 1".format(id))}
+    genre_result = select_query("SELECT genre FROM movie_genres WHERE id='{0}'".format(id))
     db_result['data'][0]['genres'] = list(genre['genre'] for genre in genre_result)
     db_result['time'] = datetime.datetime.now()
     return jsonify(db_result)
@@ -61,17 +61,17 @@ def update_data(id):
 @app.route("/movie/title", methods=["GET"])
 def movie_detail_by_title():
     title = request.args['title']
-    db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE title LIKE'{0}' limit 1".format(title))}
+    db_result = {'data': select_query("SELECT * FROM movie_details WHERE title LIKE'{0}' limit 1".format(title))}
     if not db_result['data']:
         obj = OMDB(apikey=api_key)
         obj.get(title=title)
         add_record(obj)
-        db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE title LIKE'{0}' limit 1".format(title))}
+        db_result = {'data': select_query("SELECT * FROM movie_details WHERE title LIKE'{0}' limit 1".format(title))}
         if not db_result:
             return jsonify({'message': 'No data found!'}), 404
 
     print(db_result)
-    genre_result = select_query("SELECT genre FROM Movie_Genres WHERE id='{0}'".format(db_result['data'][0]['id']))
+    genre_result = select_query("SELECT genre FROM movie_genres WHERE id='{0}'".format(db_result['data'][0]['id']))
     print(genre_result)
     db_result['data'][0]['genres'] = list(genre['genre'] for genre in genre_result)
     db_result['time'] = datetime.datetime.now()
@@ -81,11 +81,11 @@ def movie_detail_by_title():
 # endpoint to get detail by id
 @app.route("/movie/<id>", methods=["GET"])
 def movie_detail_by_id(id):
-    db_result = {'data': select_query("SELECT * FROM Movie_Details WHERE id='{0}' limit 1".format(id))}
+    db_result = {'data': select_query("SELECT * FROM movie_details WHERE id='{0}' limit 1".format(id))}
     if not db_result['data']:
         return jsonify({'message': 'No data found in local!'}), 404
 
-    genre_result = select_query("SELECT genre FROM Movie_Genres WHERE id='{0}'".format(id))
+    genre_result = select_query("SELECT genre FROM movie_genres WHERE id='{0}'".format(id))
     db_result['data'][0]['genres'] = list(genre['genre'] for genre in genre_result)
     db_result['time'] = datetime.datetime.now()
     return jsonify(db_result)
@@ -99,7 +99,7 @@ def movies_by_filter():
 
     if action == "year":
         year = request.args['value']
-        db_result = {'data': select_query("SELECT id, title, released_year FROM Movie_Details WHERE released_year={0}"
+        db_result = {'data': select_query("SELECT id, title, released_year FROM movie_details WHERE released_year={0}"
                                           .format(year))}
         if not db_result:
             return jsonify({'message': 'No data found in local!'}), 404
@@ -107,28 +107,28 @@ def movies_by_filter():
     elif action == "year_range":
         start_year = request.args['start_year']
         end_year = request.args['end_year']
-        db_result = {'data': select_query("SELECT id, title, released_year FROM Movie_Details WHERE released_year "
+        db_result = {'data': select_query("SELECT id, title, released_year FROM movie_details WHERE released_year "
                                           "BETWEEN {0} AND {1}".format(start_year, end_year))}
         if not db_result:
             return jsonify({'message': 'No data found in local!'}), 404
 
     elif action == "higher_rating":
         value = request.args['value']
-        db_result = {'data': select_query("SELECT id, title, rating FROM Movie_Details WHERE rating > {0}"
+        db_result = {'data': select_query("SELECT id, title, rating FROM movie_details WHERE rating > {0}"
                                           .format(value))}
         if not db_result:
             return jsonify({'message': 'No data found in local!'}), 404
 
     elif action == "lower_rating":
         value = request.args['value']
-        db_result = {'data': select_query("SELECT id, title, rating FROM Movie_Details WHERE rating < {0}"
+        db_result = {'data': select_query("SELECT id, title, rating FROM movie_details WHERE rating < {0}"
                                           .format(value))}
         if not db_result:
             return jsonify({'message': 'No data found in local!'}), 404
 
     elif action == "genre":
         value = request.args['value']
-        db_result = {'data': select_query("SELECT id FROM Movie_Genres WHERE genre = '{0}'".format(value))}
+        db_result = {'data': select_query("SELECT id FROM movie_genres WHERE genre = '{0}'".format(value))}
         if not db_result:
             return jsonify({'message': 'No data found in local!'}), 404
 

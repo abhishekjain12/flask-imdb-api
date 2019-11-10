@@ -5,7 +5,7 @@ import sqlite3
 
 
 module_directory = os.path.dirname(__file__)
-db = sqlite3.connect(module_directory + '/../Movie_Data.db')
+db = sqlite3.connect(module_directory + '/../movie_data.db')
 
 
 def dict_factory(cursor, row):
@@ -33,7 +33,7 @@ def select_query(sql):
 def add_record(data):
     """Insert Operation."""
     try:
-        db.execute("INSERT INTO Movie_Details (id, title, released_year, rating) VALUES (?, ?, ?, ?)",
+        db.execute("INSERT INTO movie_details (id, title, released_year, rating) VALUES (?, ?, ?, ?)",
                        (data.get_imdbid(),
                         data.get_title(),
                         data.get_release_year(),
@@ -41,7 +41,7 @@ def add_record(data):
         db.commit()
 
         for genre in list(data.get_genre()):
-            db.execute("INSERT INTO Movie_Genres (id, genre) VALUES (?, ?)", (data.get_imdbid(), str(genre)))
+            db.execute("INSERT INTO movie_genres (id, genre) VALUES (?, ?)", (data.get_imdbid(), str(genre)))
             db.commit()
 
         return True
@@ -56,7 +56,7 @@ def add_record(data):
 def update_rating(id, data):
     """Update Operation."""
     try:
-        db.execute("UPDATE Movie_Details SET rating=? WHERE id=?", (data, id))
+        db.execute("UPDATE movie_details SET rating=? WHERE id=?", (data, id))
         db.commit()
         return True
 
@@ -69,11 +69,11 @@ def update_rating(id, data):
 def update_genre(id, data):
     """Update Operation."""
     try:
-        db.execute("DELETE FROM Movie_Genres WHERE id=?", id)
+        db.execute("DELETE FROM movie_genres WHERE id=?", id)
         db.commit()
 
         for genre in data.split(","):
-            db.execute("INSERT INTO Movie_Genres (id, genre) VALUES (?, ?)", (id, str(genre)))
+            db.execute("INSERT INTO movie_genres (id, genre) VALUES (?, ?)", (id, str(genre)))
             db.commit()
         return True
 

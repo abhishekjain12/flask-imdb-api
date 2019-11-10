@@ -8,7 +8,7 @@ import pymysql.cursors
 db = pymysql.connect(host="localhost",
                      user="root",
                      password="root",
-                     db="Movie_Data",
+                     db="movie_data",
                      charset='utf8mb4',
                      cursorclass=pymysql.cursors.DictCursor)
 
@@ -30,7 +30,7 @@ def select_query(sql):
 def add_record(data):
     """Insert Operation."""
     try:
-        cursor.execute("INSERT INTO Movie_Details (id, title, released_year, rating) VALUES (%s, %s, %s, %s)",
+        cursor.execute("INSERT INTO movie_details (id, title, released_year, rating) VALUES (%s, %s, %s, %s)",
                        (data.get_imdbid(),
                         data.get_title(),
                         data.get_release_year(),
@@ -38,7 +38,7 @@ def add_record(data):
         db.commit()
 
         for genre in list(data.get_genre()):
-            cursor.execute("INSERT INTO Movie_Genres (id, genre) VALUES (%s, %s)", (data.get_imdbid(), str(genre)))
+            cursor.execute("INSERT INTO movie_genres (id, genre) VALUES (%s, %s)", (data.get_imdbid(), str(genre)))
             db.commit()
 
         return True
@@ -53,7 +53,7 @@ def add_record(data):
 def update_rating(id, data):
     """Update Operation."""
     try:
-        cursor.execute("UPDATE Movie_Details SET rating=%s WHERE id=%s", (data, id))
+        cursor.execute("UPDATE movie_details SET rating=%s WHERE id=%s", (data, id))
         db.commit()
         return True
 
@@ -66,11 +66,11 @@ def update_rating(id, data):
 def update_genre(id, data):
     """Update Operation."""
     try:
-        cursor.execute("DELETE FROM Movie_Genres WHERE id=%s", id)
+        cursor.execute("DELETE FROM movie_genres WHERE id=%s", id)
         db.commit()
 
         for genre in data.split(","):
-            cursor.execute("INSERT INTO Movie_Genres (id, genre) VALUES (%s, %s)", (id, str(genre)))
+            cursor.execute("INSERT INTO movie_genres (id, genre) VALUES (%s, %s)", (id, str(genre)))
             db.commit()
         return True
 
